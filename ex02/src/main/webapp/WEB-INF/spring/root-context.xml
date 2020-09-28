@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd" xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring" xmlns:context="http://www.springframework.org/schema/context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+
+<!-- HikariCP DBconnection setting-->
+
+
+
+<bean class="com.zaxxer.hikari.HikariConfig" id="hikariConfig">
+
+<!-- <property name="driverClassName" value="oracle.jdbc.OracleDriver"></property><property name="jdbcUrl" value="jdbc:oracle:thin:@oracle11gr2.crwpeutgjyaj.ap-northeast-2.rds.amazonaws.com:15211:ORCL"></property><property name="username" value="JIT00030(각자 부여된 아이디)"></property><property name="password" value="JIT00030(각자 부여된 비번)"></property> -->
+
+
+<!-- 아래 값으로 변경 copy-->
+
+
+<property value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" name="driverClassName"/>
+
+<property value="jdbc:log4jdbc:oracle:thin:@oracle11gr2.crwpeutgjyaj.ap-northeast-2.rds.amazonaws.com:15211:ORCL" name="jdbcUrl"/>
+
+<property value="JIT00003" name="username"/>
+
+<property value="JIT00003" name="password"/>
+<property name="minimumIdle" value="1" />
+<property name="maximumPoolSize" value="1" />
+</bean>
+
+<!-- HikariCP configuration -->
+
+
+
+<bean class="com.zaxxer.hikari.HikariDataSource" id="dataSource" destroy-method="close">
+
+<constructor-arg ref="hikariConfig"/>
+
+</bean>
+
+<!-- sqlSessionFactory -->
+
+
+
+<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+
+<property name="dataSource" ref="dataSource"/>
+
+</bean>
+
+<mybatis-spring:scan base-package="org.zerock.mapper"/>
+<context:component-scan base-package="org.zerock.service"/>
+
+</beans>
