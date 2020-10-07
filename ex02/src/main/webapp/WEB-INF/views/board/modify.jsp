@@ -25,20 +25,18 @@
       
         <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
         <input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
-	    <input type='hidden' name='type' value='<c:out value="${cri.type }"/>'>
-		<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
       
  
 <div class="form-group">
   <label>Bno</label> 
   <input class="form-control" name='bno' 
-     value='<c:out value="${board.bno }"/>' readonly="readonly">
+     value='<c:out value="${boardVO.bno }"/>' readonly="readonly">
 </div>
 
 <div class="form-group">
   <label>Title</label> 
   <input class="form-control" name='title' 
-    value='<c:out value="${board.title }"/>' >
+    value='<c:out value="${boardVO.title }"/>' >
 </div>
 
 <div class="form-group">
@@ -49,19 +47,19 @@
 <div class="form-group">
   <label>Writer</label> 
   <input class="form-control" name='writer'
-    value='<c:out value="${board.writer}"/>' readonly="readonly">            
+    value='<c:out value="${boardVO.writer}"/>' readonly="readonly">            
 </div>
 
 <div class="form-group">
   <label>RegDate</label> 
   <input class="form-control" name='regDate'
-    value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${board.regdate}" />'  readonly="readonly">            
+    value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${boardVO.regDate}" />'  readonly="readonly">            
 </div>
 
 <div class="form-group">
   <label>Update Date</label> 
   <input class="form-control" name='updateDate'
-    value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${board.updateDate}" />'  readonly="readonly">            
+    value='<fmt:formatDate pattern = "yyyy/MM/dd" value = "${boardVO.updateDate}" />'  readonly="readonly">            
 </div>
 
           

@@ -1,11 +1,14 @@
 package org.zerock.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.BoardVO;
+import org.zerock.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -17,42 +20,53 @@ public class BoardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
 	
-	@Test
-	public void testGetList() {
-		mapper.getList().forEach(board->log.info(board));
-	}
+//	@Test
+//	public void testGetList() {
+//		mapper.getList().forEach(board->log.info(board));
+//	}
 	
-	@Test
-	public void testInsert() {
+//	@Test
+//	public void testPaging() {
+//		Criteria cri = new Criteria();
+//		//10ê°œì”© 3í˜ì´ì§€
+//		cri.setPageNum(3);
+//		cri.setAmount(10);
+//		
+//		List<BoardVO> list = mapper.getListWithPaging(cri);
+//		list.forEach(board -> log.info(board));
+//	}
+//	
+//	@Test
+//	public void testInsert() {
 //		BoardVO board = new BoardVO();
-//		board.setTitle("»õ·Î ÀÛ¼ºÇÏ´Â ±Û");
-//		board.setContent("»õ·Î ÀÛ¼ºÇÏ´Â ³»¿ë");
+//		board.setTitle("ì…ë ¥ëœ ì œëª©");
+//		board.setContent("ì…ë ¥ëœ ì½˜í…ì¸ ");
 //		board.setWriter("newbie");
 //		
 //		mapper.insert(board);
 //		log.info(board);
+//	}
+	
+	@Test
+	public void testRead() {
+		BoardVO board = mapper.read(5L);
+		log.info(board);
 	}
 	
-//	@Test
-//	public void testRead() {
-//		BoardVO board = mapper.read(5L);
-//		log.info(board);
-//	}
-//	
 //	@Test
 //	public void testDelete() {
 //		log.info("DELETE COUNT: " + mapper.delete(3L));
 //	}
-//	
-	@Test
-	public void testUpdate() {
-		BoardVO board = new BoardVO();
-		board.setBno(5L);
-		board.setTitle("¼öÁ¤µÈ ±Û");
-		board.setContent("¼öÁ¤µÈ ³»¿ë");
-		board.setWriter("user00");
 		
-		int count = mapper.update(board);
-		log.info("UPDATE COUNT: " + count);
-	}
+//	@Test
+//	public void testUpdate() {
+//		BoardVO board = new BoardVO();
+//		board.setBno(5L);
+//		board.setTitle("ìˆ˜ì •ëœ ì œëª©");
+//		board.setContent("ìˆ˜ì •ëœ ì»¨í…ì¸ ");
+//		board.setWriter("user00");
+//		
+//		int count = mapper.update(board);
+//		log.info("UPDATE COUNT: " + count);
+//	}
 }

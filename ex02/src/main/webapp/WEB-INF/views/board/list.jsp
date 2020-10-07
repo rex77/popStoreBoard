@@ -37,17 +37,19 @@
 					<c:forEach items="${list}" var="board">
 						<tr>
 							<td><c:out value="${board.bno}" /></td>
-							<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td>
+							<%--<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td>--%>
 
-							<%-- <td><a class='move' href='<c:out value="${board.bno}"/>'><c:out value="${board.title}" /></a></td> --%>
+							  <td><a class='move' href='<c:out value="${board.bno}"/>'><c:out value="${board.title}" /></a></td>
 							<td><c:out value="${board.writer}" /></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate}" /></td>
+							 <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate}" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate}" /></td>
 						</tr>
 					</c:forEach>
-					
 				</table>
-
+				
+				
+				
+			
 			<!-- Modal  추가 -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
@@ -74,6 +76,50 @@
 			
 		</div>
 		<!--  end panel-body -->
+				<!--  Pagination 시작 -->
+				<div class='pull-right'>
+					<ul class="pagination">
+
+						<%-- <c:if test="${pageMaker.prev}">
+							<li class="paginate_button previous"><a href="#">Previous</a>
+							</li>
+						</c:if>
+
+						<c:forEach var="num" begin="${pageMaker.startPage}"	end="${pageMaker.endPage}">
+							<li class="paginate_button"><a href="#">${num}</a></li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next}">
+							<li class="paginate_button next"><a href="#">Next</a></li>
+						</c:if> --%>
+
+						 <c:if test="${pageMaker.prev}">
+							<li class="paginate_button previous"><a href="${pageMaker.startPage -1}">Previous</a></li>
+						</c:if>
+
+						<c:forEach var="num" begin="${pageMaker.startPage}"	end="${pageMaker.endPage}">
+							<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+								<a href="${num}">${num}</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next}">
+							<li class="paginate_button next"><a href="${pageMaker.endPage +1 }">Next</a></li>
+						</c:if>
+
+					</ul>
+				</div>
+				<!--  Pagination 끝 -->
+				
+				<!-- Form 시작 -->
+				<form id='actionForm' action="/board/list" method='get'>
+				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+				
+				<%-- <input type='hidden' name='type' value='<c:out value="${ pageMaker.cri.type }"/>'>
+				<input type='hidden' name='keyword'	value='<c:out value="${ pageMaker.cri.keyword }"/>'>  --%>
+				</form>
+				<!-- Form 끝 -->
 	</div>
 	<!-- end panel -->
 </div>
@@ -104,7 +150,31 @@
 		$("#regBtn").on("click", function() {
 			self.location = "/board/register";
 		});
+
+		//페이지 네비게이션 부분
+		var actionForm = $("#actionForm");
+
+		// 페이지 번호 클릭 이벤트
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+			// console.log('click');
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		});
+		
+		// 상세보기 클릭 이벤트
+		$(".move").on("click",function(e) {
+			e.preventDefault();
+			actionForm.append("<input type='hidden' name='bno' value='" + $(this).attr("href")	+ "'>");
+			actionForm.attr("action", "/board/get");
+			actionForm.submit();
+		});
+
 	});
+
+	
 </script>
+
+
 
 <%@include file="../includes/footer.jsp"%>

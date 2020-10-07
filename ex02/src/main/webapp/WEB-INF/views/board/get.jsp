@@ -23,23 +23,23 @@
 
           <div class="form-group">
           <label>Bno</label> <input class="form-control" name='bno'
-            value='<c:out value="${board.bno }"/>' readonly="readonly">
+            value='<c:out value="${boardVO.bno }"/>' readonly="readonly">
         </div>
 
         <div class="form-group">
           <label>Title</label> <input class="form-control" name='title'
-            value='<c:out value="${board.title }"/>' readonly="readonly">
+            value='<c:out value="${boardVO.title }"/>' readonly="readonly">
         </div>
 
         <div class="form-group">
           <label>Text area</label>
           <textarea class="form-control" rows="3" name='content'
-            readonly="readonly"><c:out value="${board.content}" /></textarea>
+            readonly="readonly"><c:out value="${boardVO.content}" /></textarea>
         </div>
 
         <div class="form-group">
           <label>Writer</label> <input class="form-control" name='writer'
-            value='<c:out value="${board.writer }"/>' readonly="readonly">
+            value='<c:out value="${boardVO.writer }"/>' readonly="readonly">
         </div>
 
 <%-- 		<button data-oper='modify' class="btn btn-default">
@@ -57,11 +57,11 @@
 
 
 <form id='operForm' action="/boad/modify" method="get">
-  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
+  <input type='hidden' id='bno' name='bno' value='<c:out value="${boardVO.bno}"/>'>
   <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
   <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-  <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-  <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
+  <%--<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+  <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>   --%>
  
 </form>
 
